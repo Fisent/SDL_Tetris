@@ -1,53 +1,74 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <algorithm>
+#include <iostream>
+#include "src/TetrisBlock.h"
+#include "src/input.handling.h"
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
-int main(int arg, char** args){
-	SDL_Init(SDL_INIT_VIDEO);
 
-	SDL_Window* window = SDL_CreateWindow("SDL_first_game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-	SDL_Surface* surface = SDL_GetWindowSurface(window);
-
-	bool run = true;
-
-	SDL_Event e;
-
-	SDL_Rect* rect = nullptr;
-
-	int x_pos = 0;
-	int y_pos = 0;
-	int speed = 10;
-	
-
-	while(run){
-
-	    while(SDL_PollEvent(&e) != 0){
-	        if(e.type == SDL_QUIT){
-	            run = false;
-	        } else if(e.type == SDL_KEYDOWN){
-	            auto sym = e.key.keysym.sym;
-	        }
-	    }
-
-	    rect = new SDL_Rect();
-        rect->x = x_pos;
-        rect->y = y_pos;
-        rect->w = 10;
-        rect->h = 10;
-
-        SDL_FillRect(surface, nullptr, SDL_MapRGB(surface->format, 0x00, 0x00, 0x00));
-        SDL_FillRect(surface, rect, SDL_MapRGB(surface->format, 0xFF, 0xFF, 0xFF));
-
-        delete rect;
+SDL_Window* window = nullptr;
+SDL_Surface* surface = nullptr;
 
 
+Uint32 startclock = 0;
+Uint32 deltaclock = 0;
+Uint32 currentFPS = 0;
 
-        SDL_UpdateWindowSurface(window);
-	}
 
+bool init(){
+    SDL_Init(SDL_INIT_VIDEO);
+
+    window = SDL_CreateWindow("SDL_first_game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    if(window == nullptr){
+        printf("Error %s", SDL_GetError());
+        return false;
+    }
+    surface = SDL_GetWindowSurface(window);
+    if(surface == nullptr){
+        printf("Error %s", SDL_GetError());
+    }
+    return true;
+}
+
+
+void quit(){
     SDL_FreeSurface(surface);
     SDL_Quit();
+}
+
+
+void game_loop(){
+    bool run = true;
+
+    startclock = SDL_GetTicks();
+
+    while(run){
+        SDL_Delay(1000/60);
+        std::pair<bool, bool> input = get_input(run);
+        if(input.first)
+            std::cout << "left" << std::endl;
+        if(input.second)
+            std::cout << "right" << std::endl;
+
+        // FPS calculation
+        deltaclock = SDL_GetTicks() - startclock;
+        startclock = SDL_GetTicks();
+        if(deltaclock != 0)
+            currentFPS = 1000 / deltaclock;
+
+        std::cout << "FPS: " << currentFPS << std::endl;
+    }
+}
+
+
+int main(int arg, char** args){
+
+    init();
+
+    game_loop();
+
+    quit();
 }

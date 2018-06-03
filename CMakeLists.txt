@@ -3,7 +3,7 @@ project(SDL_first_game)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(SDL_first_game main.cpp)
+add_executable(SDL_first_game main.cpp src/TetrisBlock.cpp src/TetrisBlock.h src/input_handling.cpp src/input.handling.h)
 
 INCLUDE(FindPkgConfig)
 
