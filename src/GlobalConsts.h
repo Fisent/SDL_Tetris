@@ -1,0 +1,16 @@
+//
+// Created by fisent on 03.06.18.
+//
+
+#ifndef SDL_TETRIS_GLOBALCONSTS_H
+#define SDL_TETRIS_GLOBALCONSTS_H
+
+const int BOARD_HEIGHT = 22;
+const int BOARD_WIDTH = 10;
+const int GRID_SIZE = 20;
+
+const int SCREEN_WIDTH = BOARD_WIDTH * GRID_SIZE;
+const int SCREEN_HEIGHT = BOARD_HEIGHT * GRID_SIZE;
+
+
+#endif //SDL_TETRIS_GLOBALCONSTS_H

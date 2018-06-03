@@ -6,8 +6,15 @@
 #define SDL_FIRST_GAME_TETRISBLOCK_H
 
 
-class TetrisBlock {
+#include <SDL2/SDL.h>
 
+class TetrisBlock {
+int x, y;
+
+public:
+    TetrisBlock(int x, int y);
+    TetrisBlock();
+    void draw(SDL_Surface* surface);
 };
 
 

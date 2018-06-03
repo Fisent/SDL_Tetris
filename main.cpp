@@ -4,9 +4,9 @@
 #include <iostream>
 #include "src/TetrisBlock.h"
 #include "src/input.handling.h"
+#include "src/Board.h"
+#include "src/GlobalConsts.h"
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
 
 
 SDL_Window* window = nullptr;
@@ -16,6 +16,8 @@ SDL_Surface* surface = nullptr;
 Uint32 startclock = 0;
 Uint32 deltaclock = 0;
 Uint32 currentFPS = 0;
+
+Board board;
 
 
 bool init(){
@@ -39,19 +41,32 @@ void quit(){
     SDL_Quit();
 }
 
+void game_tick(){
+    board.draw(surface);
+
+    SDL_UpdateWindowSurface(window);
+}
+
 
 void game_loop(){
     bool run = true;
 
     startclock = SDL_GetTicks();
 
+    board.create_block();
+
     while(run){
         SDL_Delay(1000/60);
+        // input
         std::pair<bool, bool> input = get_input(run);
-        if(input.first)
+        if(input.first) {
             std::cout << "left" << std::endl;
-        if(input.second)
+        }
+        if(input.second) {
             std::cout << "right" << std::endl;
+        }
+
+        game_tick();
 
         // FPS calculation
         deltaclock = SDL_GetTicks() - startclock;

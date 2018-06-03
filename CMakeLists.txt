@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
-project(SDL_first_game)
+project(SDL_Tetris)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(SDL_first_game main.cpp src/TetrisBlock.cpp src/TetrisBlock.h src/input_handling.cpp src/input.handling.h)
+add_executable(SDL_Tetris main.cpp src/TetrisBlock.cpp src/TetrisBlock.h src/input_handling.cpp src/input.handling.h src/Board.cpp src/Board.h src/GlobalConsts.h)
 
 INCLUDE(FindPkgConfig)
 
