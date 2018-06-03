@@ -3,7 +3,7 @@ project(SDL_Tetris)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(SDL_Tetris main.cpp src/TetrisBlock.cpp src/TetrisBlock.h src/input_handling.cpp src/input.handling.h src/Board.cpp src/Board.h src/GlobalConsts.h)
+add_executable(SDL_Tetris main.cpp src/TetrisBlock.cpp src/TetrisBlock.h src/input_handling.cpp src/input.handling.h src/Board.cpp src/Board.h src/GlobalConsts.h src/LTimer.cpp src/LTimer.h)
 
 INCLUDE(FindPkgConfig)
 

@@ -1,24 +1,20 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_timer.h>
 #include <algorithm>
 #include <iostream>
+#include <sstream>
 #include "src/TetrisBlock.h"
 #include "src/input.handling.h"
 #include "src/Board.h"
 #include "src/GlobalConsts.h"
-
+#include "src/LTimer.h"
 
 
 SDL_Window* window = nullptr;
 SDL_Surface* surface = nullptr;
 
-
-Uint32 startclock = 0;
-Uint32 deltaclock = 0;
-Uint32 currentFPS = 0;
-
 Board board;
-
 
 bool init(){
     SDL_Init(SDL_INIT_VIDEO);
@@ -41,7 +37,9 @@ void quit(){
     SDL_Quit();
 }
 
-void game_tick(){
+void game_tick(bool& run){
+    get_input(run, board);
+
     board.draw(surface);
 
     SDL_UpdateWindowSurface(window);
@@ -51,24 +49,29 @@ void game_tick(){
 void game_loop(){
     bool run = true;
 
-    startclock = SDL_GetTicks();
+    LTimer fpsTimer;
+    LTimer capTimer;
+    int countedFrames = 0;
+    fpsTimer.start();
 
     board.create_block();
 
     while(run){
-        SDL_Delay(1000/60);
-        // input
-        std::pair<bool, bool> input = get_input(run, board);
+        capTimer.start();
+        float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
+//        if (avgFPS > 2000000){
+//            avgFPS = 0;
+//        }
+        std::cout << "FPS: " << avgFPS << std::endl;
 
-        game_tick();
+        game_tick(run);
 
-        // FPS calculation
-        deltaclock = SDL_GetTicks() - startclock;
-        startclock = SDL_GetTicks();
-        if(deltaclock != 0)
-            currentFPS = 1000 / deltaclock;
-
-        std::cout << "FPS: " << currentFPS << std::endl;
+        ++countedFrames;
+        // if frame finished early
+        int frameTics = capTimer.getTicks();
+        if(frameTics < SCREEN_TICKS_PER_FRAME){
+            SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTics);
+        }
     }
 }
 
