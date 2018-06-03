@@ -20,7 +20,9 @@ public:
     std::vector<TetrisBlock*> blocks;
     void draw(SDL_Surface* surface);
     void create_block();
-    void physic_frame();
+    void drop();
+    void go_left();
+    void go_right();
 };
 
 

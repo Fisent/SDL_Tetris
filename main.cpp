@@ -58,13 +58,7 @@ void game_loop(){
     while(run){
         SDL_Delay(1000/60);
         // input
-        std::pair<bool, bool> input = get_input(run);
-        if(input.first) {
-            std::cout << "left" << std::endl;
-        }
-        if(input.second) {
-            std::cout << "right" << std::endl;
-        }
+        std::pair<bool, bool> input = get_input(run, board);
 
         game_tick();
 

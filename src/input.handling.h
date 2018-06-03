@@ -5,6 +5,8 @@
 #ifndef SDL_FIRST_GAME_INPUT_HANDLING_H
 #define SDL_FIRST_GAME_INPUT_HANDLING_H
 
-std::pair<bool, bool> get_input(bool& run);
+#include "Board.h"
+
+std::pair<bool, bool> get_input(bool& run, Board& board);
 
 #endif //SDL_FIRST_GAME_INPUT_HANDLING_H

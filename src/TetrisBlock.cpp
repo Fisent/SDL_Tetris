@@ -19,3 +19,15 @@ void TetrisBlock::draw(SDL_Surface *surface) {
     rect.h = GRID_SIZE;
     SDL_FillRect(surface, &rect, SDL_MapRGB(surface->format, 0xFF, 0xFF, 0xFF));
 }
+
+void TetrisBlock::drop() {
+    y++;
+}
+
+void TetrisBlock::go_left() {
+    x--;
+}
+
+void TetrisBlock::go_right() {
+    x++;
+}
