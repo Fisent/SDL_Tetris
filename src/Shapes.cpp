@@ -38,3 +38,7 @@ void SquareShape::draw(SDL_Surface* surface) {
         block->draw(surface);
     }
 }
+
+void SquareShape::rotate() {
+
+}

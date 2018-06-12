@@ -28,18 +28,12 @@ std::pair<bool, bool> get_input(bool& run, Board& board){
                     break;
                 case SDLK_SPACE:
                     board.drop();
+                    break;
+                case SDLK_UP:
+                    board.rotate();
             }
         }
     }
-
-    //checking keyboard states
-// for now disabled
-//    if(keystates[SDL_SCANCODE_LEFT]){
-//        result.first = true;
-//    }
-//    if(keystates[SDL_SCANCODE_RIGHT]){
-//        result.second = true;
-//    }
 
     return result;
 }

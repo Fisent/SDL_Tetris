@@ -13,6 +13,7 @@ class Shape {
 public:
     Shape();
     virtual void draw(SDL_Surface* surface) = 0;
+    virtual void rotate() = 0;
     void go_left();
     void go_right();
     void drop();
@@ -23,7 +24,8 @@ public:
 class SquareShape : public Shape{
 public:
     SquareShape();
-    void  draw(SDL_Surface* surface) override;
+    void draw(SDL_Surface* surface) override;
+    void rotate() override;
 };
 
 

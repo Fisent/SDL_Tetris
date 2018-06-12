@@ -24,6 +24,7 @@ public:
     void drop();
     void go_left();
     void go_right();
+    void rotate();
 };
 
 
