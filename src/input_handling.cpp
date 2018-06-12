@@ -25,6 +25,9 @@ std::pair<bool, bool> get_input(bool& run, Board& board){
                     break;
                 case SDLK_RIGHT:
                     board.go_right();
+                    break;
+                case SDLK_SPACE:
+                    board.drop();
             }
         }
     }

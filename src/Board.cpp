@@ -10,29 +10,32 @@ void Board::draw(SDL_Surface *surface) {
     for(auto block : blocks){
         block->draw(surface);
     }
+
+
+    if(active_shape != nullptr){
+        active_shape->draw(surface);
+    }
 }
 
-
-void Board::create_block() {
-    TetrisBlock*  block = new TetrisBlock();
-    blocks.push_back(block);
-    active_block = block;
+void Board::create_shape() {
+    Shape* shape = new SquareShape();
+    active_shape = shape;
 }
 
 Board::~Board() {
-    for(TetrisBlock* block : blocks){
+    for(Block* block : blocks){
         delete block;
     }
 }
 
 void Board::drop() {
-    active_block->drop();
+    active_shape->drop();
 }
 
 void Board::go_left() {
-    active_block->go_left();
+    active_shape->go_left();
 }
 
 void Board::go_right() {
-    active_block->go_right();
+    active_shape->go_right();
 }

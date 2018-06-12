@@ -8,18 +8,19 @@
 
 #include <SDL2/SDL.h>
 #include <vector>
-#include "TetrisBlock.h"
+#include "Block.h"
+#include "Shapes.h"
 
 
 class Board {
 private:
-    TetrisBlock* active_block = nullptr;
+    Shape* active_shape = nullptr;
 
 public:
     ~Board();
-    std::vector<TetrisBlock*> blocks;
+    std::vector<Block*> blocks;
     void draw(SDL_Surface* surface);
-    void create_block();
+    void create_shape();
     void drop();
     void go_left();
     void go_right();

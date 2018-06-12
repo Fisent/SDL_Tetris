@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <iostream>
 #include <sstream>
-#include "src/TetrisBlock.h"
+#include "src/Block.h"
 #include "src/input.handling.h"
 #include "src/Board.h"
 #include "src/GlobalConsts.h"
@@ -54,7 +54,7 @@ void game_loop(){
     int countedFrames = 0;
     fpsTimer.start();
 
-    board.create_block();
+    board.create_shape();
 
     while(run){
         capTimer.start();

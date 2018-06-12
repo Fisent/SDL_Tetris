@@ -8,16 +8,13 @@
 
 #include <SDL2/SDL.h>
 
-class TetrisBlock {
-int x, y = 0;
-
+class Block {
 public:
-    TetrisBlock(int x, int y);
-    TetrisBlock();
+    int x, y = 0;
+
+    Block(int x, int y);
     void draw(SDL_Surface* surface);
-    void drop();
-    void go_left();
-    void go_right();
+    
 };
 
 
