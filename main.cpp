@@ -45,6 +45,7 @@ void game_tick(bool& run){
     SDL_UpdateWindowSurface(window);
 }
 
+int frames_beetwen_drops = 20;
 
 void game_loop(){
     bool run = true;
@@ -52,6 +53,7 @@ void game_loop(){
     LTimer fpsTimer;
     LTimer capTimer;
     int countedFrames = 0;
+    int dropdownCounter = frames_beetwen_drops;
     fpsTimer.start();
 
     board.create_shape();
@@ -62,7 +64,12 @@ void game_loop(){
 //        if (avgFPS > 2000000){
 //            avgFPS = 0;
 //        }
-        std::cout << "FPS: " << avgFPS << std::endl;
+//        std::cout << "FPS: " << avgFPS << std::endl;
+        dropdownCounter--;
+        if(dropdownCounter <= 0){
+            board.drop();
+            dropdownCounter = frames_beetwen_drops;
+        }
 
         game_tick(run);
 

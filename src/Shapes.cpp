@@ -26,13 +26,6 @@ void Shape::drop() {
     }
 }
 
-SquareShape::SquareShape(){
-    blocks.push_back(new Block(5, 0));
-    blocks.push_back(new Block(6, 0));
-    blocks.push_back(new Block(5, 1));
-    blocks.push_back(new Block(6, 1));
-}
-
 void SquareShape::draw(SDL_Surface* surface) {
     for(auto block : blocks){
         block->draw(surface);
@@ -41,4 +34,11 @@ void SquareShape::draw(SDL_Surface* surface) {
 
 void SquareShape::rotate() {
 
+}
+
+SquareShape::SquareShape() {
+    blocks.push_back(new Block(5, 0));
+    blocks.push_back(new Block(6, 0));
+    blocks.push_back(new Block(5, 1));
+    blocks.push_back(new Block(6, 1));
 }

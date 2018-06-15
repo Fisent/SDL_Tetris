@@ -9,6 +9,7 @@
 #include "Block.h"
 #include <vector>
 
+
 class Shape {
 public:
     Shape();
@@ -17,7 +18,6 @@ public:
     void go_left();
     void go_right();
     void drop();
-
     std::vector<Block*> blocks;
 };
 

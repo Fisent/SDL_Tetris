@@ -12,9 +12,10 @@
 #include "Shapes.h"
 
 
-class Board {
+class Board{
 private:
     Shape* active_shape = nullptr;
+    void release_active_shape();
 
 public:
     ~Board();
