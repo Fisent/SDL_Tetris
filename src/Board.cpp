@@ -48,6 +48,8 @@ void Board::drop() {
         active_shape->drop();
     else
         release_active_shape();
+
+    remove_full_rows();
 }
 
 void Board::go_left() {
@@ -93,4 +95,53 @@ void Board::release_active_shape() {
     }
     delete active_shape;
     active_shape = new SquareShape();
+}
+
+void Board::remove_full_rows() {
+    Block* tab[BOARD_WIDTH][BOARD_HEIGHT]{};
+    for(int row = 0; row < BOARD_HEIGHT; row++){
+        bool row_full = true;
+        for(int col = 0; col < BOARD_WIDTH; col++){
+            if(get_block_at(col, row) == nullptr) row_full = false;
+        }
+        if(row_full){
+            for(int col = 0; col < BOARD_WIDTH; col++){
+                remove_block_at(col, row);
+            }
+        }
+    }
+}
+
+void Board::drop_all_board_above(int lowest_dropped_block_y) {
+    for(auto block : blocks){
+        block->y++;
+    }
+}
+
+Block *Board::get_block_at(int x, int y) {
+    for(auto block : blocks){
+        if(block->x == x && block->y == y) return block;
+    }
+    return nullptr;
+}
+
+void Board::remove_block_at(int x, int y) {
+    int index = get_index_of_block_at(x, y);
+    if(index >= 0) {
+        Block* block = blocks.at(index);
+        blocks.erase(blocks.begin() + index);
+        delete block;
+    }
+
+}
+
+int Board::get_index_of_block_at(int x, int y) {
+    int index = -1;
+    for(int i = 0; i < blocks.size(); i++){
+        auto block = blocks.at(i);
+        if(block->x == x && block->y == y) {
+            index = i;
+        }
+    }
+    return index;
 }
